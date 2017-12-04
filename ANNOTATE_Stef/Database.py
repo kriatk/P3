@@ -45,21 +45,21 @@ def sort(error_ID,file_name):
     cursor = db.cursor()
     cursor.execute('''SELECT X, Y, status FROM errors WHERE id=?''', (error_ID,))
     e = cursor.fetchone()
-    a=int(e[1])
-    b=int(e[1])
+    a=int(e[2])
+    b=int(e[2])
     errors=[]
     IDs=[]
     del errors[:]
     del IDs[:]
     while a is b:
-        errors.append(int(e[0]))
+        errors.append(int(e[1]))
         IDs.append(error_ID)
         error_ID=error_ID+1
         cursor.execute('''SELECT X, Y, status FROM errors WHERE id=?''', (error_ID,))
         e = cursor.fetchone()
         if e is None:
             break
-        b=int(e[1])
+        b=int(e[2])
     db.commit()
     #db.close() #maybe needed to be able to write to database
     return errors, IDs, a
