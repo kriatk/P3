@@ -1,21 +1,28 @@
-
-int speedo[2];
-// the setup routine runs once when you press reset:
+char dataString[50] = {0};
+int a =0; 
+float speed0 = 0;
+long int final;
 void setup() {
-  // initialize serial communication at 9600 bits per second:
-  Serial.begin(9600);
- 
- 
-}
+Serial.begin(9600);
 
-// the loop routine runs over and over again forever:
+//Starting serial communication
+}
+  
 void loop() {
-  speedo[0]=24;
-  speedo[1]=0;
-  for (int x=0; x<=1000; x++) {
-   Serial.write(speedo, 2);}
+  for (a=0;a<1000;a++){// a value increase every loop
+            final =0;
+            long int speedo= speed0*100;
+            speed0=speed0+0.015;
+            final = speedo << 8;
+            //Serial.println (final);
+            final = final | (a%2);
+            //Serial.println (speedo);
+            //delay(1000);
+  sprintf(dataString,"%06lX",final); // convert a value to hexa l for long and  
+  Serial.println(dataString);   // send the data
+  char dataString[50] = {0};
+  }
   delay(2000);
-  speedo[1]=1;
-   for (int x=0; x<=1000; x++) {
-   Serial.write(speedo, 2);}
+  while(speed0>10){ sprintf(dataString,"%06lX",final); // convert a value to hexa l for long and  
+  Serial.println(dataString);}               
 }

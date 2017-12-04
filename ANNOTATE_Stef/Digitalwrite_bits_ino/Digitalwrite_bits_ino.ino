@@ -11,12 +11,12 @@ void loop() {
             delay(1000);
             long int speedo= speed0*100;
             final = speedo << 8;
-            Serial.println (final);
+            //Serial.println (final);
             delay(1000);
             final = final | (a%2);
-            Serial.println (final);
+            //Serial.println (final);
             delay(1000);
-  sprintf(dataString,"%06X",final); // convert a value to hexa 
+  sprintf(dataString,"%06lX",final); // convert a value to hexa 
   Serial.println(dataString);   // send the data
   char dataString[50] = {0};
   }                  // give the loop some break
