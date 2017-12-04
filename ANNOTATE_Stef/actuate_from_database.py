@@ -2,13 +2,13 @@ import sqlite3
 import random
 import time
 import Database
-import spidev
+#import spidev
 
 
 #initiate spi
-spi = spidev.SpiDev()
-spi.open(0, 1)
-spi.max_speed_hz = 10000000
+#spi = spidev.SpiDev()
+#spi.open(0, 1)
+#spi.max_speed_hz = 10000000
 
 #definitions
 file_name='errors.db'
@@ -43,12 +43,18 @@ cursor.execute("SELECT * FROM errors")
 c=cursor.fetchall()
 print(c)
 while 1:
+    db = sqlite3.connect(file_name) # either create or open database
+    cursor = db.cursor()
     cursor.execute('''SELECT X, Y, status FROM errors WHERE id=?''', (error_ID,))
     e = cursor.fetchone()
+    db.close()
     while e is None:
+        db = sqlite3.connect(file_name) # either create or open database
+        cursor = db.cursor()
         cursor.execute('''SELECT X, Y, status FROM errors WHERE id=?''', (error_ID,))
         e = cursor.fetchone()
         #print("waiting fo data")
+        db.close()
 
     errors, IDs, a=Database.sort(error_ID,file_name)
     print("actuate at:",a+0.5,"now at:",speed*(time.clock()-start))
@@ -61,13 +67,13 @@ while 1:
     print("ActuatorsOut", Actuators)
 
     #wait for position to actuate
-    while speed*(time.clock()-start) <= a+0.5: #+0.5 because we cut the position instead of rounding. when we mark at a and one error lies at a+ >0.5 we are too a away from it
+    while speed*(time.clock()-start+0.03) <= a+0.5: #+0.5 because we cut the position instead of rounding. when we mark at a and one error lies at a+ >0.5 we are too a away from it
         0
     print(a+0.5,speed*(time.clock()-start),"Print now")
     print(time.clock())
-    spi.writebytes(Actuators)
-    time.sleep(0.5)
-    spi.writebytes(ActuatorsOff)
+    #spi.writebytes(Actuators)
+    time.sleep(0.03)
+    #spi.writebytes(ActuatorsOff)
     print(time.clock())
     print(a+0.5,speed*(time.clock()-start),"marked")
 
@@ -79,9 +85,12 @@ while 1:
 
     #write status in database (later also time since start, time, date )
     for ID in IDs:
+        db = sqlite3.connect(file_name) # either create or open database
+        cursor = db.cursor()
         cursor.execute('''UPDATE errors SET status = ? WHERE id = ? ''',(1, ID))
         print("0 to 1 for ID", ID)
         db.commit()
+        db.close()
 
     #set new ID to look at in database
     error_ID = IDs[-1]+1 #last elemt of array
