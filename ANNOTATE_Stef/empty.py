@@ -33,3 +33,29 @@ while material is 0:
 	s[0]= receive_serial()
 	material = int(s[0]) >> 16
 	print(material)
+
+# import serial
+#
+# ser = serial.Serial('/dev/ttyACM2',9600)
+# s = [0]
+# Flag = 0
+# speed=0
+# material=0
+#
+# while speed <= 1450:
+# 	read_serial=ser.readline()
+# 	try:
+# 		s[0] = str(int (ser.readline(),16))
+# 		print (s[0])
+#
+#
+# 		#print read_serial
+# 	except:
+# 		s[0]=0
+# 		print("ERROR")
+# 		continue
+#
+# 	speed=int(s[0]) & 65535
+# 	material=int(s[0]) >>16
+# 	print(material)
+#

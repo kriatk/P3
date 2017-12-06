@@ -1,7 +1,7 @@
 char dataString[50] = {0};
-int a =0; 
+unsigned long a =0; 
 float speed0 = 0;
-long int final;
+unsigned long int final;
 void setup() {
 Serial.begin(9600);
 
@@ -13,9 +13,11 @@ void loop() {
             final =0;
             long int speedo= speed0*100;
             speed0=speed0+0.015;
-            final = speedo << 8;
-            //Serial.println (final);
-            final = final | (a%2);
+            final = (a%2)<< 16;
+            //Serial.println (a%2<<16);
+
+            final = final | int(speedo);
+            
             //Serial.println (speedo);
             //delay(1000);
   sprintf(dataString,"%06lX",final); // convert a value to hexa l for long and  
