@@ -25,11 +25,13 @@ Actuators    =[0x96, 0x5F,0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF,
 ActuatorsOff =[0x96, 0x5F,0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF]
 
 error_ID=1
+
 #speed measurement
 speed = 0 # conveyor speed cm/s
 s = [0]
 Flag=0
 material=0
+offset=0#3.275 #in cm
 
 def receive_serial():
     read_serial = ser.readline()
@@ -42,8 +44,8 @@ def receive_serial():
     return s[0]
 
 def actuator(cm,state,Actuators) :
-    byte1 = 27-2*(11-cm)
-    byte2 = 26-2*(11-cm)
+    byte1 = 27-2*(10-cm)
+    byte2 = 26-2*(10-cm)
     if state is 1:
         Actuators[byte1] = 0x00
         Actuators[byte2] = 0x00
@@ -54,20 +56,24 @@ def actuator(cm,state,Actuators) :
 
 #check for conveyor speed to be constant (manually by input in keyboard or digitally)
 
+spi.writebytes(ActuatorsOff)
 
+#input speed
 while Flag is 0:
 	s[0]= receive_serial()
 	speed = int(s[0]) & 65535
 	time.sleep(0.05)
-	s[0]=receive_serial()
-	speed0=int(s[0]) & 65535
-	if speed0 <= speed:
+	# s[0]=receive_serial()
+	# speed0=int(s[0]) & 65535
+	if speed >= 1000:
 		Flag=1
+speed=(speed/100)*(100/60) #speed from m/min to cm/s
 
+#check for material
 while material is 0:
 	s[0]= receive_serial()
 	material = int(s[0]) >> 16
-	print(material)
+	print(material,speed)
 
 start = time.clock()
 cursor.execute("SELECT * FROM errors")
@@ -103,7 +109,7 @@ while 1:
     print("ActuatorsOut", Actuators)
 
     #wait for position to actuate
-    while speed*(time.clock()-start+0.03) <= a+0.5: #+0.5 because we cut the position instead of rounding. when we mark at a and one error lies at a+ >0.5 we are too a away from it
+    while speed*(time.clock()-start)+offset <= a+0.5: #+0.5 because we cut the position instead of rounding. when we mark at a and one error lies at a+ >0.5 we are too a away from it
         0
     print(a+0.5,speed*(time.clock()-start),"Print now")
     print(time.clock())

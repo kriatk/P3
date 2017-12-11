@@ -9,19 +9,22 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/ANNOTATE_Stef$write_to_database.coverage" NAME="write_to_database Coverage Results" MODIFIED="1512660328647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="750">
       <file leaf-file-name="actuate_from_database.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/actuate_from_database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="86" column="8" lean-forward="false" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="8" />
+            <state relative-caret-position="760">
+              <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
-                <marker date="1512605938855" expanded="true" signature="2339:2359" ph="SELECT * FRO... errors" />
-                <marker date="1512605938855" expanded="true" signature="2540:2582" ph="SELECT X, Y,... errors" />
-                <marker date="1512605938855" expanded="true" signature="2827:2869" ph="SELECT X, Y,... errors" />
-                <marker date="1512605938855" expanded="true" signature="4301:4342" ph="UPDATE errors... " />
+                <marker date="1512667149136" expanded="true" signature="2485:2505" ph="SELECT * FRO... errors" />
+                <marker date="1512667149136" expanded="true" signature="2686:2728" ph="SELECT X, Y,... errors" />
+                <marker date="1512667149136" expanded="true" signature="2973:3015" ph="SELECT X, Y,... errors" />
+                <marker date="1512667149136" expanded="true" signature="4449:4490" ph="UPDATE errors... " />
               </folding>
             </state>
           </provider>
@@ -30,9 +33,13 @@
       <file leaf-file-name="write_to_database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/write_to_database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="1280">
+              <caret line="35" column="9" lean-forward="false" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+              <folding>
+                <marker date="1512660328633" expanded="true" signature="215:242" ph="DROP TABLE I... " />
+                <marker date="1512660328633" expanded="true" signature="266:355" ph="CREATE TABLE... IF" />
+                <marker date="1512660328633" expanded="true" signature="965:985" ph="SELECT * FRO... errors" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -40,7 +47,7 @@
       <file leaf-file-name="Database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="1000">
               <caret line="27" column="14" lean-forward="false" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -59,8 +66,8 @@
       <file leaf-file-name="serial_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/serial_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="34" selection-end-column="19" />
+            <state relative-caret-position="840">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="34" selection-end-column="19" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -71,8 +78,8 @@
       <file leaf-file-name="empty.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/empty.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1160">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="240">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -96,6 +103,11 @@
       <find>spi</find>
       <find>db = sqlite3.connect(file_name</find>
       <find>cursor.execute</find>
+      <find>actuate at</find>
+      <find>speed</find>
+      <find>offset</find>
+      <find>marked</find>
+      <find>10</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -104,11 +116,11 @@
         <option value="$PROJECT_DIR$/spi.py" />
         <option value="$PROJECT_DIR$/Testy Logic.py" />
         <option value="$PROJECT_DIR$/SPI_Kris.py" />
-        <option value="$PROJECT_DIR$/write_to_database.py" />
         <option value="$PROJECT_DIR$/Database.py" />
         <option value="$PROJECT_DIR$/SerialPi.py" />
         <option value="$PROJECT_DIR$/empty.py" />
         <option value="$PROJECT_DIR$/serial_test.py" />
+        <option value="$PROJECT_DIR$/write_to_database.py" />
         <option value="$PROJECT_DIR$/actuate_from_database.py" />
       </list>
     </option>
@@ -139,7 +151,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -151,6 +162,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -170,7 +182,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.actuate_from_database">
+  <component name="RunManager" selected="Python.write_to_database">
     <configuration name="Database" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -275,9 +287,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.actuate_from_database" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Python Console" />
-        <item index="2" class="java.lang.String" itemvalue="Python.write_to_database" />
+        <item index="0" class="java.lang.String" itemvalue="Python.write_to_database" />
+        <item index="1" class="java.lang.String" itemvalue="Python.actuate_from_database" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Python Console" />
         <item index="3" class="java.lang.String" itemvalue="Python.Database" />
         <item index="4" class="java.lang.String" itemvalue="Python.Testy Logic" />
       </list>
@@ -307,12 +319,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32438162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978016" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932863" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23445596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24287565" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32932863" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -322,6 +333,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32932863" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -351,7 +363,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/actuate_from_database.py</url>
+          <line>101</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -400,10 +419,10 @@
           <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1512605938855" expanded="true" signature="2339:2359" ph="SELECT * FRO... errors" />
-            <marker date="1512605938855" expanded="true" signature="2540:2582" ph="SELECT X, Y,... errors" />
-            <marker date="1512605938855" expanded="true" signature="2827:2869" ph="SELECT X, Y,... errors" />
-            <marker date="1512605938855" expanded="true" signature="4301:4342" ph="UPDATE errors... " />
+            <marker date="1512667149136" expanded="true" signature="2485:2505" ph="SELECT * FRO... errors" />
+            <marker date="1512667149136" expanded="true" signature="2686:2728" ph="SELECT X, Y,... errors" />
+            <marker date="1512667149136" expanded="true" signature="2973:3015" ph="SELECT X, Y,... errors" />
+            <marker date="1512667149136" expanded="true" signature="4449:4490" ph="UPDATE errors... " />
           </folding>
         </state>
       </provider>
@@ -459,10 +478,10 @@
           <caret line="76" column="174" lean-forward="false" selection-start-line="76" selection-start-column="174" selection-end-line="76" selection-end-column="174" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1512605938855" expanded="true" signature="2339:2359" ph="SELECT * FRO... errors" />
-            <marker date="1512605938855" expanded="true" signature="2540:2582" ph="SELECT X, Y,... errors" />
-            <marker date="1512605938855" expanded="true" signature="2827:2869" ph="SELECT X, Y,... errors" />
-            <marker date="1512605938855" expanded="true" signature="4301:4342" ph="UPDATE errors... " />
+            <marker date="1512667149136" expanded="true" signature="2485:2505" ph="SELECT * FRO... errors" />
+            <marker date="1512667149136" expanded="true" signature="2686:2728" ph="SELECT X, Y,... errors" />
+            <marker date="1512667149136" expanded="true" signature="2973:3015" ph="SELECT X, Y,... errors" />
+            <marker date="1512667149136" expanded="true" signature="4449:4490" ph="UPDATE errors... " />
           </folding>
         </state>
       </provider>
@@ -518,10 +537,10 @@
           <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1512605938855" expanded="true" signature="2339:2359" ph="SELECT * FRO... errors" />
-            <marker date="1512605938855" expanded="true" signature="2540:2582" ph="SELECT X, Y,... errors" />
-            <marker date="1512605938855" expanded="true" signature="2827:2869" ph="SELECT X, Y,... errors" />
-            <marker date="1512605938855" expanded="true" signature="4301:4342" ph="UPDATE errors... " />
+            <marker date="1512667149136" expanded="true" signature="2485:2505" ph="SELECT * FRO... errors" />
+            <marker date="1512667149136" expanded="true" signature="2686:2728" ph="SELECT X, Y,... errors" />
+            <marker date="1512667149136" expanded="true" signature="2973:3015" ph="SELECT X, Y,... errors" />
+            <marker date="1512667149136" expanded="true" signature="4449:4490" ph="UPDATE errors... " />
           </folding>
         </state>
       </provider>
@@ -758,8 +777,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/empty.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1160">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state relative-caret-position="240">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -770,13 +789,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="1000">
           <caret line="27" column="14" lean-forward="false" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
@@ -793,8 +811,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/serial_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="34" selection-end-column="19" />
+        <state relative-caret-position="840">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="34" selection-end-column="19" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -803,22 +821,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/write_to_database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="1280">
+          <caret line="35" column="9" lean-forward="false" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+          <folding>
+            <marker date="1512660328633" expanded="true" signature="215:242" ph="DROP TABLE I... " />
+            <marker date="1512660328633" expanded="true" signature="266:355" ph="CREATE TABLE... IF" />
+            <marker date="1512660328633" expanded="true" signature="965:985" ph="SELECT * FRO... errors" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/actuate_from_database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="86" column="8" lean-forward="false" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="8" />
+        <state relative-caret-position="760">
+          <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1512605938855" expanded="true" signature="2339:2359" ph="SELECT * FRO... errors" />
-            <marker date="1512605938855" expanded="true" signature="2540:2582" ph="SELECT X, Y,... errors" />
-            <marker date="1512605938855" expanded="true" signature="2827:2869" ph="SELECT X, Y,... errors" />
-            <marker date="1512605938855" expanded="true" signature="4301:4342" ph="UPDATE errors... " />
+            <marker date="1512667149136" expanded="true" signature="2485:2505" ph="SELECT * FRO... errors" />
+            <marker date="1512667149136" expanded="true" signature="2686:2728" ph="SELECT X, Y,... errors" />
+            <marker date="1512667149136" expanded="true" signature="2973:3015" ph="SELECT X, Y,... errors" />
+            <marker date="1512667149136" expanded="true" signature="4449:4490" ph="UPDATE errors... " />
           </folding>
         </state>
       </provider>

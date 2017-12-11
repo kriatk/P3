@@ -17,16 +17,26 @@ cursor.execute(''' CREATE TABLE IF NOT EXISTS errors(id INTEGER PRIMARY KEY, X R
 db.commit()
 db.close()
 
-
-while loop is not 20:
-
-    y=y+random.uniform(0.0,2.0)
-    y=round(y,2)
-    x=random.uniform(0.0,10.0)
-    x=round(x,2)
+#for i in range(0):
+loop=0
+while loop is not 10:
     Database.writeDB(file_name,x,y,0)
     print(y,x)
     loop=loop+1
+    y=y+1#random.uniform(0.0,2.0)
+    #y=round(y,2)
+    x=x+1#random.uniform(0.0,10.0)
+    #x=round(x,2)
+
+loop=0
+while loop is not 10:
+    Database.writeDB(file_name,x,y,0)
+    print(y,x)
+    loop=loop+1
+    y=y+1#random.uniform(0.0,2.0)
+    #y=round(y,2)
+    x=x-1#random.uniform(0.0,10.0)
+    #x=round(x,2)
 
 #Database.get_posts('errors.db')
 db = sqlite3.connect(file_name) # either create or open database
