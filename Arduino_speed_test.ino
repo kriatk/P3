@@ -1,25 +1,29 @@
-int irSpeed = A0;
-int irMat = A1;
-bool looped=0;
+int irMat = 0;
+int pinMat = A1;
+int irSpeed = 0;
+int pinSpeed = A0;
+int counter = 0;
+unsigned long time_start = 0;
+unsigned long time_end = 0;
+int mat_ir_value;
 
-unsigned long int start;
-unsigned long int interval;
-unsigned long int Serial_Print;
+float sp[6];
+float Speed = 0.0;
+float distance = 1.7;
+float average_speed = 0.0;
 
-unsigned long int Material;
-float Speed;
+bool recording = false;
+bool count = false;
+bool mat_flow = false;
+
+unsigned long time_before = 0;
+unsigned long time_after;
+float diff = 0.0;
 
 char dataString[50] = {0};
+unsigned long int Serial_Print;
+int Material0 = 0;
 
-long int material(void){
-if (analogRead(irMat) < 800){
-  Material = 1;
-}
-else{
-  Material = 0;
-}
-return Material;
-}
 
 void Send(unsigned long int Material0, float Speed0){
         
@@ -32,34 +36,67 @@ void Send(unsigned long int Material0, float Speed0){
 
 void setup() {
   // put your setup code here, to run once:
-Serial.begin(9600); //Begin serial monitor
-pinMode(irSpeed, INPUT); //IR as input (analog)
-pinMode(irMat, INPUT); //IR2 as input (analog)
+  pinMode(pinSpeed, INPUT);
+  pinMode(pinMat, INPUT);
 
-
+  Serial.begin(115200);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-while (analogRead(irSpeed) >=800 ){//black
-Material=material();
-if (looped == 1){
-  //Send(Material,Speed);
-  }
-}
-start= micros();
-while (analogRead(irSpeed) <800 ){//white
-Material=material();
-if (looped == 1){
-  //Send(Material,Speed);
-  }
-}
-interval=micros()-start;
-Serial.println(micros());
-Serial.println(start);
-Serial.println(interval);
 
-Speed=1.7/(interval/1000000);
-looped=1;
-Serial.println(Speed);
+//  time_before = micros();
+
+//  for (int i = 0; i < 10000; i++){
+    if (analogRead(pinSpeed) < 800 && recording == false) {
+    time_start = micros();
+    recording = true;
+    //Serial.println("start");
+    } 
+
+    if (analogRead(pinSpeed) > 800 && recording == true) {
+    time_end = micros();
+    recording = false;
+    count = true;
+    //Serial.println("end");
+    }
+
+  
+  mat_ir_value = analogRead(pinMat);
+  if (mat_ir_value < 800){
+      Material0 = 1;
+    //  Serial.println("Material = 1");
+      }
+      else{
+      Material0 = 0;  
+      }
+  
+  if (count == true) {
+    Speed = distance * 1000000 / ((time_end - time_start));
+    //shift distance to serial array
+//    sp[counter] = Speed;
+//    counter++;
+// 
+//    Serial.println("count = true");
+    Serial.println(Speed);    
+//    Serial.println(Speed/1.666667);
+    count = false;    
+
+//       if (counter == 7){
+//      average_speed = (sp[0]+sp[1]+sp[2]+sp[3]+sp[4]+sp[5]+sp[6])/7;
+//      counter = 0;
+//      Serial.println(average_speed/1.666667);
+//      }       
+    }
+//  Send(Material0, average_speed);
+
+//  }
+  
+//  time_after = micros();
+//  diff = 10000.0/((time_after-time_before)/1000.0);
+//  Serial.println(time_after);
+//  Serial.println(time_before);
+//  Serial.println(time_after - time_before);
+//
+//  Serial.println(diff); 
+//  while(1){}
 }
