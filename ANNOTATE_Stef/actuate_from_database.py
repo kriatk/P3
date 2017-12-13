@@ -38,7 +38,7 @@ offset=0#3.275 #in cm
 def receive_serial():
     read_serial = ser.readline()
     try:
-        s[0] = str(int(ser.readline(), 32))
+        s[0] = str(int(ser.readline(), 16))
         #print(read_serial)
         #print(s[0])# print read_serial
     except:
@@ -65,12 +65,16 @@ spi.writebytes(ActuatorsOff)
 while Flag is 0:
     try:
         serial_test=int(receive_serial()) & 65535
-        #print("Serialbit:",serial_test)
+        print("Serialbit:",serial_test)
+        print(ser.readline())
+
+        time.sleep(5)
+
         if ( serial_test >1000):
             lspeed.append(int(receive_serial()) & 65535)
         #print(lspeed)
     except:
-        #print("no int")
+        print("no int")
     if len(lspeed) >= 10:
         speed=(sum(lspeed)/len(lspeed))/100
         Flag=1
@@ -78,7 +82,6 @@ while Flag is 0:
 
         del lspeed[:]
 #speed=(speed*1.667/100) #speed from m/min to cm/s
-print(speed)
 time.sleep(0.5)
 
 
@@ -88,6 +91,8 @@ while material is 0:
     s[0]= receive_serial()
     material = int(s[0]) >> 16
     print("material?",material,speed)
+
+print(speed)
 
 start = time.clock()
 #cursor.execute("SELECT * FROM errors")
