@@ -4,7 +4,6 @@ import time
 import Database
 import serial
 import spidev
-import RPi.GPIO as GPIO            # import RPi.GPIO module
 
 #import write_to_database
 
@@ -12,7 +11,7 @@ import RPi.GPIO as GPIO            # import RPi.GPIO module
 spi = spidev.SpiDev()
 spi.open(0, 1)
 spi.max_speed_hz = 10000000
-ser = serial.Serial('/dev/ttyACM0',9600)
+ser = serial.Serial('/dev/ttyACM0',115200)
 
 #definitions
 file_name='errors.db'
@@ -39,11 +38,12 @@ offset=0#3.275 #in cm
 def receive_serial():
     read_serial = ser.readline()
     try:
-        s[0] = str(int(ser.readline(), 16))
-        print(s[0])# print read_serial
+        s[0] = str(int(ser.readline(), 32))
+        #print(read_serial)
+        #print(s[0])# print read_serial
     except:
         s[0] = 0
-        print("ERROR")
+        #print("ERROR")
     return s[0]
 
 def actuator(cm,state,Actuators) :
@@ -64,17 +64,24 @@ spi.writebytes(ActuatorsOff)
 #input speed (it is sent in cm/s)
 while Flag is 0:
     try:
-        lspeed.append(int(receive_serial()) & 65535)
+        serial_test=int(receive_serial()) & 65535
+        #print("Serialbit:",serial_test)
+        if ( serial_test >1000):
+            lspeed.append(int(receive_serial()) & 65535)
+        #print(lspeed)
     except:
-        print("no int")
-    print(lspeed)
-    if len(lspeed) >= 7:
-        speed=(sum(lspeed)/len(lspeed))*100
+        #print("no int")
+    if len(lspeed) >= 10:
+        speed=(sum(lspeed)/len(lspeed))/100
         Flag=1
+        #print(lspeed)
+
         del lspeed[:]
 #speed=(speed*1.667/100) #speed from m/min to cm/s
 print(speed)
 time.sleep(0.5)
+
+
 
 #check for material
 while material is 0:
@@ -111,39 +118,38 @@ while 1:
     #write actuators into array
     for error in errors:
         actuator(error,1,Actuators)
-        print("added error", error)
-        print("ActuatorsIn", Actuators)
-    print("ActuatorsOut", Actuators)
+        #print("added error", error)
+        #print("ActuatorsIn", Actuators)
+    #print("ActuatorsOut", Actuators)
 
     #wait for position to actuate
-    while speed*(time.clock()-start)+offset <= a+0.5: #+0.5 because we cut the position instead of rounding. when we mark at a and one error lies at a+ >0.5 we are too a away from it
+    while speed*(time.clock()-start)-offset <= a+0.5: #+0.5 because we cut the position instead of rounding. when we mark at a and one error lies at a+ >0.5 we are too a away from it
         0
     print(a+0.5,speed*(time.clock()-start),"Print now")
-    print(time.clock())
+    #print(time.clock())
     spi.writebytes(Actuators)
     time.sleep(0.03)
     spi.writebytes(ActuatorsOff)
-    print(time.clock())
+    #print(time.clock())
     print(a+0.5,speed*(time.clock()-start),"marked")
 
-    print(Actuators)
+    #print(Actuators)
 
     #reset actuator array
     Actuators     = [0x96, 0x5F,0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF]
-    print("RESET",Actuators)
 
     #write status in database (later also time since start, time, date )
-    for ID in IDs:
-        db = sqlite3.connect(file_name, timeout=10) # either create or open database
-        cursor = db.cursor()
-        cursor.execute('''UPDATE errors SET status = ? WHERE id = ? ''',(1, ID))
-        print("0 to 1 for ID", ID)
-        try:
-            db.commit()
-        except:
-            print("CHANGE WAS NOT COMMITTED")
-            continue
-        db.close()
+    #for ID in IDs:
+    #    db = sqlite3.connect(file_name, timeout=10) # either create or open database
+    #    cursor = db.cursor()
+    #    cursor.execute('''UPDATE errors SET status = ? WHERE id = ? ''',(1, ID))
+    #    #print("0 to 1 for ID", ID)
+    #    try:
+    #        db.commit()
+    #    except:
+    #        print("CHANGE WAS NOT COMMITTED")
+    #        continue
+    #    db.close()
 
     #set new ID to look at in database
     error_ID = IDs[-1]+1 #last elemt of array
