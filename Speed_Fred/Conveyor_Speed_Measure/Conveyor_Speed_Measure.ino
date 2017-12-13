@@ -62,7 +62,7 @@ pinMode(digitalPin, INPUT); //digitalPin as input
 void loop(){
 
 while (digitalRead(digitalPin) == HIGH){
-  Serial.println(digitalRead(digitalPin));
+  //Serial.println(digitalRead(digitalPin));
   Send_To_Rasp_Material=0;
 while (i < 10){ //Run for 10 times (5 white & 5 black stripes)
   value1 = analogRead(ir1); //Read value from sensor (Black > 800, White < 800
@@ -133,6 +133,8 @@ z++;
 }
 
 Send_To_Rasp_Speed = average;
+Serial.println(Send_To_Rasp_Speed);
+
 //Send_To_Rasp_Speed = 10;
 //Serial.println(Send_To_Rasp_Material);
 //Serial.println(Send_To_Rasp_Material<<16);
@@ -173,10 +175,9 @@ starter = false;
 }
 
 Send_To_Rasp_Material=material();
-
 Speed= Send_To_Rasp_Speed*100;
 Material = Send_To_Rasp_Material << 16;
-Serial.println ("material?");
+//Serial.println ("material?");
 
 Serial_Print = Material | int(Speed);
 

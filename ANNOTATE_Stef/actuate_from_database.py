@@ -4,6 +4,8 @@ import time
 import Database
 import serial
 import spidev
+import RPi.GPIO as GPIO            # import RPi.GPIO module
+
 #import write_to_database
 
 #initiate spi & serial
@@ -29,6 +31,7 @@ error_ID=1
 #speed measurement
 speed = 0 # conveyor speed cm/s
 s = [0]
+lspeed=[]
 Flag=0
 material=0
 offset=0#3.275 #in cm
@@ -58,28 +61,32 @@ def actuator(cm,state,Actuators) :
 
 spi.writebytes(ActuatorsOff)
 
-#input speed
+#input speed (it is sent in cm/s)
 while Flag is 0:
-	s[0]= receive_serial()
-	speed = int(s[0]) & 65535
-	time.sleep(0.05)
-	# s[0]=receive_serial()
-	# speed0=int(s[0]) & 65535
-	if speed >= 1000:
-		Flag=1
-speed=(speed/100)*(100/60) #speed from m/min to cm/s
+    try:
+        lspeed.append(int(receive_serial()) & 65535)
+    except:
+        print("no int")
+    print(lspeed)
+    if len(lspeed) >= 7:
+        speed=(sum(lspeed)/len(lspeed))*100
+        Flag=1
+        del lspeed[:]
+#speed=(speed*1.667/100) #speed from m/min to cm/s
+print(speed)
+time.sleep(0.5)
 
 #check for material
 while material is 0:
-	s[0]= receive_serial()
-	material = int(s[0]) >> 16
-	print(material,speed)
+    s[0]= receive_serial()
+    material = int(s[0]) >> 16
+    print("material?",material,speed)
 
 start = time.clock()
-cursor.execute("SELECT * FROM errors")
-c=cursor.fetchall()
-db.close()
-print(c)
+#cursor.execute("SELECT * FROM errors")
+#c=cursor.fetchall()
+#db.close()
+#print(c)
 while 1:
     db = sqlite3.connect(file_name, timeout=10) # either create or open database
 
