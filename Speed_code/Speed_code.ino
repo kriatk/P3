@@ -9,7 +9,7 @@ int mat_ir_value;
 
 float sp[6];
 float Speed = 0.0;
-float distance = 1.7;
+float distance = 1.71;
 float average_speed = 0.0;
 
 bool recording = false;
@@ -62,15 +62,14 @@ void loop() {
     sp[counter] = Speed;
     counter++;
  
-    Serial.println(Speed);    
+    //Serial.println(Speed);    
     count = false;    
 
       if (counter == 7){
         average_speed = (sp[0]+sp[1]+sp[2]+sp[3]+sp[4]+sp[5]+sp[6])/7;
         counter = 0;
-        Serial.println(average_speed/1.666667);
+        //Serial.println(average_speed/1.666667);
       }       
     }
   Send(Material0, average_speed);
   }
-}

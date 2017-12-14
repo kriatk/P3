@@ -33,7 +33,7 @@ s = [0]
 lspeed=[]
 Flag=0
 material=0
-offset=0#3.275 #in cm
+offset=2.2#3.275 #in cm
 
 def receive_serial():
     read_serial = ser.readline()
@@ -63,42 +63,36 @@ spi.writebytes(ActuatorsOff)
 
 #input speed (it is sent in cm/s)
 while Flag is 0:
-    try:
-        serial_test=int(receive_serial()) & 65535
-        print("Serialbit:",serial_test)
-        print(ser.readline())
+    s[0] = receive_serial()
+    speed0 = int(s[0]) & 65535
+    #print(speed0)
+    if speed0 >1000:
+        lspeed.append(float(speed0))
 
-        time.sleep(5)
+    if len(lspeed)>1000:
+        Flag = 1
 
-        if ( serial_test >1000):
-            lspeed.append(int(receive_serial()) & 65535)
-        #print(lspeed)
-    except:
-        print("no int")
-    if len(lspeed) >= 10:
-        speed=(sum(lspeed)/len(lspeed))/100
-        Flag=1
-        #print(lspeed)
-
-        del lspeed[:]
-#speed=(speed*1.667/100) #speed from m/min to cm/s
 time.sleep(0.5)
-
-
+finalspeed=sum(lspeed)/(len(lspeed)*100) #times 1.66667 at max speed
 
 #check for material
-while material is 0:
+while material is not 1:
     s[0]= receive_serial()
     material = int(s[0]) >> 16
-    print("material?",material,speed)
+print("material?",material,finalspeed)
 
-print(speed)
+print(finalspeed)
 
 start = time.clock()
 #cursor.execute("SELECT * FROM errors")
 #c=cursor.fetchall()
 #db.close()
 #print(c)
+print("actuate at")
+print("now at")
+print("print now")
+print("marked")
+
 while 1:
     db = sqlite3.connect(file_name, timeout=10) # either create or open database
 
@@ -115,10 +109,14 @@ while 1:
         #print("waiting fo data")
         db.close()
         print("DB Closed")
-        time.sleep(1)
+        while 1:
+            1
 
     errors, IDs, a=Database.sort(error_ID,file_name)
-    print("actuate at:",a+0.5,"now at:",speed*(time.clock()-start))
+
+    print(errors)
+    print(a+0.5)
+    print(finalspeed*(time.clock()-start)-offset)
 
     #write actuators into array
     for error in errors:
@@ -128,17 +126,15 @@ while 1:
     #print("ActuatorsOut", Actuators)
 
     #wait for position to actuate
-    while speed*(time.clock()-start)-offset <= a+0.5: #+0.5 because we cut the position instead of rounding. when we mark at a and one error lies at a+ >0.5 we are too a away from it
+    while finalspeed*(time.clock()-start)-offset <= a+0.5: #+0.5 because we cut the position instead of rounding. when we mark at a and one error lies at a+ >0.5 we are too a away from it
         0
-    print(a+0.5,speed*(time.clock()-start),"Print now")
+    print(finalspeed * (time.clock() - start) - offset)
     #print(time.clock())
     spi.writebytes(Actuators)
-    time.sleep(0.03)
+    time.sleep(0.01)
     spi.writebytes(ActuatorsOff)
     #print(time.clock())
-    print(a+0.5,speed*(time.clock()-start),"marked")
-
-    #print(Actuators)
+    print(finalspeed * (time.clock() - start) - offset)
 
     #reset actuator array
     Actuators     = [0x96, 0x5F,0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF, 0xFF,0xFF]

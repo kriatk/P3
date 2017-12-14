@@ -13,7 +13,7 @@ def receive_serial():
         print("ERROR")
     return s[0]
 
-ser = serial.Serial('/dev/ttyACM0',9600)
+ser = serial.Serial('/dev/ttyACM0',115200)
 s = [0]
 Flag = 0
 speed=0
@@ -32,4 +32,6 @@ while Flag is 0:
 while material is 0:
 	s[0]= receive_serial()
 	material = int(s[0]) >> 16
-	print(material)
+	print(s[0])
+
+	print('in mat loop',material)
