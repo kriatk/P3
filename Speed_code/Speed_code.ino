@@ -1,27 +1,32 @@
-int irMat = 0;
-int pinMat = A1;
-int irSpeed = 0;
-int pinSpeed = A0;
-int counter = 0;
+
+// Define pins
+#define pinMat A1
+#define pinSpeed A0
+
+//Initialize material variables
+int irMat = 0; // analog reading value
+int Material = 0; //material state
+
+//Initialize speed calculation variables
 unsigned long time_start = 0;
 unsigned long time_end = 0;
-int mat_ir_value;
-
-float sp[6];
 float Speed = 0.0;
 float distance = 1.71;
 float average_speed = 0.0;
+float sp[6];
+int pointer = 1;
 
+// Initialize boolean flags
 bool recording = false;
-bool count = false;
 bool mat_flow = false;
+bool count = false;
 
+//Initialize serial communication variables
 char dataString[50] = {0};
 unsigned long int Serial_Print;
-int Material0 = 0;
 
 
-void Send(unsigned long int Material0, float Speed0){
+void Send(int Material0, float Speed0){
         
     Serial_Print = Material0 <<16 | int(Speed0*100);
     
@@ -49,27 +54,27 @@ void loop() {
     count = true;
     }
 
-  mat_ir_value = analogRead(pinMat);
-  if (mat_ir_value < 800){
-      Material0 = 1;
+  irMat = analogRead(pinMat);
+  if (irMat < 800){
+      Material = 1;
       }
       else{
-      Material0 = 0;  
+      Material = 0;  
       }
   
   if (count == true) {
     Speed = distance * 1000000 / ((time_end - time_start));
-    sp[counter] = Speed;
-    counter++;
+    sp[pointer] = Speed;
+    pointer++;
  
     //Serial.println(Speed);    
     count = false;    
 
-      if (counter == 7){
+      if (pointer == 7){
         average_speed = (sp[0]+sp[1]+sp[2]+sp[3]+sp[4]+sp[5]+sp[6])/7;
-        counter = 0;
-        //Serial.println(average_speed/1.666667);
+        pointer = 0;
+        sp[6] = {0};
       }       
     }
-  Send(Material0, average_speed);
+  Send(Material, average_speed);
   }
