@@ -71,7 +71,7 @@ def dynamic_data_entry():
     Sheet_ID = 1
     Module_ID = 1
     Markers_ID = 1
-    Position_X = random.randrange(0 , 10)
+    Position_X = random.randrange(0,10)
     Position_Y = i
     Type_Flaw = random.choice(Type_Errors)
     Size_Flaw = random.randrange(0,5)
@@ -85,7 +85,7 @@ def dynamic_data_entry():
     Max_Speed = 10
     Min_Speed = 6
     Width_Belt = 10
-    Position_On_Belt = 2
+    Position_On_Belt = 1
     Date_Changed = str(datetime.datetime.fromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S'))
     Colour = 'Blue'
     Type_Marker = 'Tusche'
