@@ -23,15 +23,15 @@ def createListfromTXT(txt, list):
 
 def plot1(data,title):
     plt.plot(data,'-g')
-    plt.ylabel('speed')
-    plt.xlabel('measure ID in chronicle order')
+    plt.ylabel('speed in cm/s')
+    plt.xlabel('measurements chronological order every 3 meters of conveyor')
     plt.title(title)
     plt.show()
 
 def plot2(data1,data2,data3,data4,title):
     plt.plot(data1,data2,'-g',data3,data4,'--r')
-    plt.ylabel('speed')
-    plt.xlabel('measure ID in chronicle order')
+    plt.ylabel('speed in cm/s')
+    plt.xlabel('measurements chronological order every 3 meters of conveyor')
     plt.title(title)
     plt.show()
 
@@ -46,6 +46,7 @@ one=[]
 
 del speed[:]
 createListfromTXT("speed_test_data.txt",speed)
+plot1(speed,'Measurement with seven strips over time')
 n=0
 for s in speed:
     n=n+1
@@ -67,14 +68,19 @@ for s in speed:
 
 all=[one,two,three,four,five,six,seven]
 
+averageall=[]
+for i in range(len(one)):
+    averageall.append((one[i]+two[i]+three[i]+four[i]+five[i]+six[i]+seven[i])/7)
 
-plot1(one,'one')
-plot1(two,'two')
-plot1(three,'three')
-plot1(four,'four')
-plot1(five,'five')
-plot1(six,'six')
-plot1(seven,'seven')
+plot1(averageall,'All Strips average')
+
+# plot1(one,'one')
+# plot1(two,'two')
+# plot1(three,'three')
+# plot1(four,'four')
+# plot1(five,'five')
+# plot1(six,'six')
+# plot1(seven,'seven')
 
 ##Standard deviation
 mean=[]
@@ -88,12 +94,28 @@ for a in all:
 
 ##Trendline
 readings=[]
+readingsall=[]
 trendline=[]
+trendlineall=[]
 gain1=[]
 gain2=[]
 del readings[:]
 for i in range(len(a)):
     readings.append(i)
+
+del readingsall[:]
+for i in range(len(speed)):
+    readingsall.append(i)
+
+fitall=np.poly1d(np.polyfit(range(len(speed)),speed,1))
+gain1all=np.polyfit(range(len(speed)),speed,1)[0]
+gain2all=np.polyfit(range(len(speed)),speed,1)[1]
+
+for i in range(len(speed)):
+    trendlineall.append(fitall(i))
+
+plot2(readingsall, speed, readingsall, trendlineall, 'Speed of all 7 strips over 581 measurements')
+
 n=0
 for a in all:
     fit=np.poly1d(np.polyfit(readings,a,1))
@@ -103,13 +125,21 @@ for a in all:
         trendline.append(fit(i))
     n=n+1
 
-    plot2(readings, a, readings, trendline, 'run'+str(n))
+    plot2(readings, a, readings, trendline, 'Strip '+str(n))
 
     del trendline[:]
 
 print(mean)
+print(sum(speed)/len(speed))
 print(std)
+print(sum(std)/len(std))
+print(np.std(speed))
+
 print(gain1)
+print(gain1all)
 print(gain2)
+print(sum(gain2)/len(gain2))
+print(gain2all)
 
 #
+print(fitall(0),(fitall(580)))
