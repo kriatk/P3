@@ -2,6 +2,8 @@ clear; clc;
 %% Specify robot parameters
 import URcontrol
 import URmonitor
+mdl_UR5;
+
 ipAddress='169.254.188.7';
 tcpPose=[0,0,0,0,0,0];
 toolPayload=0.5;
@@ -66,6 +68,73 @@ for n=1:533
 end
 
 elapsedTime = toc(timerVal);
+
+%% Program for joint space
+pose_target = csvread('target_points.csv');
+pose_via = csvread('via_points.csv');
+
+pose_init = pose_via(258,:);
+URcontrol.moveLinear(robotControl,'joint',pose_init);
+URmonitor.waitForExecution(robotMonitor);
+
+cell_target=cell(28,19);
+cell_via=cell(28,19);
+
+r=1;
+c=1;
+
+for n = 1:532
+    cell_target{r,c}=pose_target(n,:);
+    cell_via{r,c}=pose_via(n,:);
+    c=c+1;
+        if c==20
+            r = r+1;
+            c = 1;
+        end
+end
+
+
+
+for n = 1:5
+    e_list(n,1) = n
+    e_list(n,2) = randi([1 28])
+    e_list(n,3) = randi([1 19])
+end
+%%
+for n = 1:20
+   % q0 = URmonitor.getRobotInfo(robotMonitor,'jointState')
+    pose_via = cell_via{e_list(n,2), e_list(n,3)}
+    pose_target = cell_target{e_list(n,2), e_list(n,3)}
+    
+    [pos,vel,acc] = mtraj(@lspb,q0,q1,50);
+
+    URcontrol.moveLinear(robotControl,'joint',pose_via);
+    URmonitor.waitForExecution(robotMonitor);
+    URcontrol.moveLinear(robotControl,'joint',pose_target);
+    URmonitor.waitForExecution(robotMonitor);
+    URcontrol.moveLinear(robotControl,'joint',pose_via);
+    URmonitor.waitForExecution(robotMonitor);
+    URcontrol.moveLinear(robotControl,'joint',pose_init);
+    URmonitor.waitForExecution(robotMonitor);
+    
+end
+
+%% Via waypoint, too fast
+
+for n = 1:5
+    tic;
+    startTime=tic;
+    wayPoint = cell_via{e_list(n,2), e_list(n,3)};
+    finalPoint = cell_target{e_list(n,2), e_list(n,3)};
+    
+    %URcontrol.moveLinear(robotControl,'joint',pose_init);
+    %URmonitor.waitForExecution(robotMonitor);
+    URcontrol.moveCircular(robotControl,wayPoint,finalPoint);
+    URmonitor.waitForExecution(robotMonitor);
+    URcontrol.moveCircular(robotControl,wayPoint,pose_init);
+    URmonitor.waitForExecution(robotMonitor);
+end
+toc(startTime)
 %% Calibrate corners
 pose_tl = [150, -300, 100, -3.14, 0.001, 0.001]; %top left square
 mark_tl = [150, -300, 90, -3.14, 0.001, 0.001]; %top left square
