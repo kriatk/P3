@@ -98,7 +98,7 @@ for n = 1:20
     e_list(n,2) = randi([1 28])
     e_list(n,3) = randi([1 19])
 end
-%%
+
 for n = 1:20
     pose_via = cell_via{e_list(n,2), e_list(n,3)}
     pose_target = cell_target{e_list(n,2), e_list(n,3)}
@@ -114,7 +114,7 @@ for n = 1:20
     
 end
 
-%% Via waypoint, too fast
+%% Via waypoint, really fast accelaration, does not stop in time
 
 for n = 1:5
     tic;
@@ -130,7 +130,8 @@ for n = 1:5
     URmonitor.waitForExecution(robotMonitor);
 end
 toc(startTime)
-%% Calibrate corners
+
+%% Calibrate corners. Moves to each corner , adjust sheet acordingly. 
 pose_tl = [150, -300, 100, -3.14, 0.001, 0.001]; %top left square
 mark_tl = [150, -300, 90, -3.14, 0.001, 0.001]; %top left square
 
