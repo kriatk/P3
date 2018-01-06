@@ -72,8 +72,8 @@ elapsedTime = toc(timerVal);
 %% Program for joint space
 pose_target = csvread('target_points.csv');
 pose_via = csvread('via_points.csv');
-
 pose_init = pose_via(258,:);
+
 URcontrol.moveLinear(robotControl,'joint',pose_init);
 URmonitor.waitForExecution(robotMonitor);
 
@@ -93,21 +93,16 @@ for n = 1:532
         end
 end
 
-
-
-for n = 1:5
+for n = 1:20
     e_list(n,1) = n
     e_list(n,2) = randi([1 28])
     e_list(n,3) = randi([1 19])
 end
 %%
 for n = 1:20
-   % q0 = URmonitor.getRobotInfo(robotMonitor,'jointState')
     pose_via = cell_via{e_list(n,2), e_list(n,3)}
     pose_target = cell_target{e_list(n,2), e_list(n,3)}
     
-    [pos,vel,acc] = mtraj(@lspb,q0,q1,50);
-
     URcontrol.moveLinear(robotControl,'joint',pose_via);
     URmonitor.waitForExecution(robotMonitor);
     URcontrol.moveLinear(robotControl,'joint',pose_target);
